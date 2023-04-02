@@ -4,7 +4,8 @@ import (
     "fmt"
     "bufio"
     "os"
-    "strconv"
+    "math/big"
+
 )
 func main() {
    
@@ -24,21 +25,23 @@ func main() {
         defer file.Close()
 
         scanner := bufio.NewScanner(file)
-        var n, i, flag int
+        n := new(big.Int)
+
         for scanner.Scan() {
             line := scanner.Text()
-            n, err = strconv.Atoi(line)
+            n.SetString(line, 10)
 
-
-            for i = 2; i <= n/2; i++ {
-                if n%i == 0 {
-                    fmt.Printf("%d=%d*%d\n", n, n/i, i)
-                    flag = 1
+            var flag_ bool
+            half := new(big.Int).Div(n, big.NewInt(2))
+            for i := big.NewInt(2); i.Cmp(half) <= 0; i = new(big.Int).Add(i, big.NewInt(1)) {
+                if new(big.Int).Mod(n, i).Cmp(big.NewInt(0)) == 0 {
+                    fmt.Printf("%v=%v*%v\n", n, new(big.Int).Div(n, i), i)
+                    flag_ = true
                     break
                 }
             }
 
-            if flag == 0 {
+            if !flag_ {
                 fmt.Println("Cannot factorize the given number.")
             }
         }
