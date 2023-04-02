@@ -16,6 +16,6 @@ for line in lines:
     flag = False
     for i in range(2, num // 2 + 1):
         if num % i == 0:
-            print(f"{num}={i}*{num // i}")
+            print(f"{num}={num // i}*{i}")
             flag = True
             break
