@@ -8,9 +8,12 @@
 *
 * Return: (void) - always returns nothing
 */
-void display_factors(int n)
+void display_factors(char *buffer)
 {
-	int i, flag = 0;
+	int flag = 0;
+    u_int32_t n;
+    u_int32_t i;
+    n = atoi(buffer);
 
 	for (i = 2; i <= n / 2; ++i)
 	{
@@ -59,7 +62,7 @@ int main(int argc, char *argv[])
 
 		if (read_line > 0)
 		{
-			display_factors(atoi(content));
+			display_factors(content);
 		}
 
 	}
